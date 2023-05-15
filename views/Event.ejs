@@ -1,0 +1,39 @@
+<%- include("partials/header") %>
+
+<form class="form-signin" action="/event" method="post">
+  <h1 class="h3 mb-3 font-weight-normal">Please Fill Event Details</h1>
+  <input
+    type="text"
+    id="name"
+    name="name"
+    class="form-control"
+    placeholder="Full Name"
+    required=""
+    autofocus=""
+    autocomplete="off"
+  />
+  <input
+    type="text"
+    id="totalPersons"
+    name="totalPersons"
+    class="form-control"
+    placeholder="Total Persons"
+    required=""
+  />
+  <input
+    type="date"
+    id="eventDate"
+    name="eventDate"
+    class="form-control"
+    placeholder="Event Date"
+    required=""
+    autofocus=""
+    autocomplete="off"
+  />
+  <div class="checkbox mb-3"></div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">
+    Book Event
+  </button>
+</form>
+
+<%- include("partials/footer") %>

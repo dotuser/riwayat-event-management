@@ -49,10 +49,25 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+const eventSchema = new mongoose.Schema({
+  organizerName: String,
+  totalPersons: Number,
+  eventDate: Date,
+  createdAt: {
+    type: Date,
+    immutable: true,
+    default: () => Date.now(),
+  },
+  updatedAt: {
+    type: Date,
+    default: () => Date.now(),
+  },
+});
+
 userSchema.plugin(uniqueValidator);
 
 const User = new mongoose.model("User", userSchema);
-
+const Event = new mongoose.model("Event", eventSchema);
 //////////////////////////////////////////// HOME Route ////////////////////////////////////////////
 
 app.get("/", (req, res) => {
@@ -141,6 +156,26 @@ app
           }
         });
       }
+    });
+  });
+
+app
+  .route("/event")
+  .get((req, res) => {
+    res.render("Event");
+  })
+  .post((req, res) => {
+    console.log(req.body.totalPersons);
+    const event = new Event({
+      name: req.body.name,
+      eventDate: req.body.eventDate,
+      totalPersons: req.body.totalPersons,
+    });
+    event.save();
+    res.render("success", {
+      msg: "Booking Successful for " + req.body.totalPersons + " Persons.",
+      route: "/",
+      btnMsg: "Home Page",
     });
   });
 
